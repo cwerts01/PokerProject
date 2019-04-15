@@ -1,0 +1,14 @@
+package com.company;
+
+import java.util.ArrayList;
+
+public class DeckOfCards extends Card{
+    ArrayList<Card> deck = new ArrayList<>();
+
+    public void createCards(){
+        for (int k=0;k<53;k++){
+            //if suit and num already exists: reshuffle
+            //add Card to deck
+        }
+    }
+}

@@ -1,6 +1,6 @@
 package com.company;
 
 public class Card {
-    String s;
-    int num;
+    private String suit;
+    private String value;
 }
