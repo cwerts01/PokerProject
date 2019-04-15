@@ -2,6 +2,6 @@ package com.company;
 
 import java.util.ArrayList;
 
-public class HandCards extends Card{
+public class HandCards {
     ArrayList<Card> hand = new ArrayList<>();
 }
