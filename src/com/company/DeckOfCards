@@ -2,13 +2,31 @@ package com.company;
 
 import java.util.ArrayList;
 
-public class DeckOfCards extends Card{
+public class DeckOfCards {
     ArrayList<Card> deck = new ArrayList<>();
 
-    public void createCards(){
-        for (int k=0;k<53;k++){
-            //if suit and num already exists: reshuffle
-            //add Card to deck
+    private DeckOfCards instance = new DeckOfCards();
+
+    private void createDeck(){
+        deck.clear();
+        for (int i=0;i<4;i++){
+            for(int j = 0; j<13; j++) {
+                Card newCard = new Card(Card.getSuits().get(i), j+2);
+                deck.add(newCard);
+            }
+
         }
+    }
+
+    public void shuffleDeck() {
+
+    }
+
+    public DeckOfCards getInstance() {
+        return instance;
+    }
+
+    private DeckOfCards() {
+        this.createDeck();
     }
 }
