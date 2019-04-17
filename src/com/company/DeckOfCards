@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class DeckOfCards {
     ArrayList<Card> deck = new ArrayList<>();
 
-    private DeckOfCards instance = new DeckOfCards();
 
     private void createDeck(){
         deck.clear();
@@ -18,13 +17,10 @@ public class DeckOfCards {
         }
     }
 
-    public void shuffleDeck() {
+    public void shuffle() {
 
     }
 
-    public DeckOfCards getInstance() {
-        return instance;
-    }
 
     private DeckOfCards() {
         this.createDeck();
