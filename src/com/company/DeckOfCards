@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class DeckOfCards {
     ArrayList<Card> deck = new ArrayList<>();
 
+
     private void createDeck(){
         deck.clear();
         for (int i=0;i<4;i++){
@@ -21,7 +22,8 @@ public class DeckOfCards {
     }
 
 
-    private DeckOfCards() {
+    public DeckOfCards() {
         this.createDeck();
     }
+
 }
