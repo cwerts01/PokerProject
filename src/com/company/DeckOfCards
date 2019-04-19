@@ -21,7 +21,7 @@ public class DeckOfCards {
     }
 
 
-    private DeckOfCards() {
+    public DeckOfCards() {
         this.createDeck();
     }
 }

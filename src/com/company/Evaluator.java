@@ -11,7 +11,7 @@ public class Evaluator {
 
     //This has to make sure to not mistake three of a kind for a two pair so each pair I find I go up another card.
     public int twopair(HandCards hand) {
-        hand.sortByNumber();
+        hand.sortByRank();
         int highestPair = 0;
         int pairs = 0;
 
@@ -30,7 +30,7 @@ public class Evaluator {
     }
 
     public int pair(HandCards hand) {
-        hand.sortByNumber();
+        hand.sortByRank();
         int highestPair = 0;
 
         for(int i = 0; i <hand.getHand().size()-1; i++) {

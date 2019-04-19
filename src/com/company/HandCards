@@ -5,7 +5,42 @@ import java.util.ArrayList;
 public class HandCards {
     private ArrayList<Card> hand = new ArrayList<>();
 
+    public HandCards() {}
+
     public ArrayList<Card> getHand() {
         return hand;
+    }
+
+    public void setHand() {
+        hand.add(new Card("Clubs", 4));
+        hand.add(new Card("Clubs", 3));
+        hand.add(new Card("Clubs", 7));
+        hand.add(new Card("Clubs", 2));
+        hand.add(new Card("Clubs", 14));
+    }
+
+    //Using an insertion sort to sort the hand by rank, use the same for deck of cards
+    public void sortByRank(){
+        for(int i = 1; i < hand.size(); i++)
+        {
+            for(int j = 0; j < i; j++)
+            {
+                if(hand.get(i).getNumber() - hand.get(j).getNumber() < 0)
+                {
+                    //Moves all the other elements up one;
+                    Card temp = hand.get(i);
+                    for (int q = i; q >= j+1; q--)
+                    {
+                        hand.set(q, hand.get(q-1));
+                    }
+                    hand.set(j, temp);
+                    break;
+                }
+            }
+        }
+    }
+
+    public String toString() {
+        return hand.toString();
     }
 }
