@@ -5,7 +5,9 @@ import java.util.ArrayList;
 public class DeckOfCards {
     ArrayList<Card> deck = new ArrayList<>();
 
-    private void createDeck(){
+    //TODO implement shuffle method, and add the methods for sorting the cards by their suit.
+
+    private void initDeck(){
         deck.clear();
         for (int i=0;i<4;i++){
             for(int j = 0; j<13; j++) {
@@ -16,11 +18,13 @@ public class DeckOfCards {
         }
     }
 
+    //Easy method to set a hand of cards to test if the methods work for evaluator.
     public void setHand() {
-        deck.add(new Card("Clubs", 4));
+        deck.clear();
+        deck.add(new Card("Clubs", 14));
         deck.add(new Card("Clubs", 3));
         deck.add(new Card("Clubs", 7));
-        deck.add(new Card("Clubs", 2));
+        deck.add(new Card("Clubs", 4));
         deck.add(new Card("Clubs", 14));
     }
 
@@ -33,9 +37,9 @@ public class DeckOfCards {
     }
 
     public DeckOfCards() {
-        this.createDeck();
     }
 
+    //Uses an insertion sort for the numbers
     public void sortByRank(){
         for(int i = 1; i < deck.size(); i++)
         {

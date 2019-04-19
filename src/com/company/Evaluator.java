@@ -2,8 +2,14 @@ package com.company;
 
 public class Evaluator {
 
-    public static void calculateHand() {
-
+    public String calculateHand(DeckOfCards myHand) {
+        int[] value = new int[4];
+        value[0] = this.pair(myHand);
+        value[1] = this.twopair(myHand);
+        if(value[0] != 0) {
+            return "You have a pair!";
+        }
+        return "nothing";
     }
 
     //TODO Go through and make sure that all the methods work, also have to make a
@@ -15,7 +21,7 @@ public class Evaluator {
         int highestPair = 0;
         int pairs = 0;
 
-        for(int i = 0; i <myHand.getDeck().size()-1; i++) {
+        for(int i = 0; i < myHand.getDeck().size()-1; i++) {
             Card temp = myHand.getDeck().get(i+1);
             if(myHand.getDeck().get(i).getNumber() == temp.getNumber()) {
                 pairs++;

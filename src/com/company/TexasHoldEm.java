@@ -1,8 +1,8 @@
 package com.company;
 
 public class TexasHoldEm implements Rules {
-    public final int handSize = 2;
-    public final int communityCardsSize = 5;
+    public DeckOfCards hand = new DeckOfCards();
+    public DeckOfCards communityCards = new DeckOfCards();
     public boolean ante = true;
     private int round = 1;
 
@@ -27,7 +27,7 @@ public class TexasHoldEm implements Rules {
 
         }
         else {
-            Evaluator.calculateHand();
+
         }
     }
 
