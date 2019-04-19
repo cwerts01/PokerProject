@@ -1,8 +1,8 @@
 package com.company;
 
 public class TexasHoldEm implements Rules {
-    public DeckOfCards hand = new DeckOfCards();
-    public DeckOfCards communityCards = new DeckOfCards();
+    public Deck hand = new Deck();
+    public Deck communityCards = new Deck();
     public boolean ante = true;
     private int round = 1;
 
