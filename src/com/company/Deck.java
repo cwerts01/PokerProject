@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Deck {
     ArrayList<Card> deck = new ArrayList<>();
 
-    //TODO implement shuffle method, and add the methods for sorting the cards by their suit.
+    //TODO implement shuffle method
 
     private void initDeck(){
         deck.clear();

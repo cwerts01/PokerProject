@@ -3,7 +3,34 @@ package com.company;
 public class Evaluator {
 
     public String calculateHand(Deck myHand) {
-        return "yay";
+        myHand.sortByRank();
+        if(this.straightFlush(myHand) > 0) {
+            return "Straight Flush, " + this.straightFlush(myHand);
+        }
+        if(this.fourOfAKind(myHand) > 0) {
+            return "Four of a kind, " + this.straightFlush(myHand);
+        }
+        if(this.fullHouse(myHand) > 0) {
+            return "Full House, " + this.straightFlush(myHand);
+        }
+        if(this.flush(myHand) > 0) {
+            return "Flush, " + this.straightFlush(myHand);
+        }
+        if(this.straight(myHand) > 0) {
+            return "Straight, " + this.straightFlush(myHand);
+        }
+        if(this.threeOfAKind(myHand) > 0) {
+            return "Three of a kind, " + this.straightFlush(myHand);
+        }
+        if(this.twopair(myHand) > 0) {
+            return "Two Pair, " + this.straightFlush(myHand);
+        }
+        if(this.pair(myHand) > 0) {
+            return "Pair, " + this.straightFlush(myHand);
+        }
+
+        //Returns the highest card instead
+        return "High Card, " + myHand.getDeck().get(myHand.getDeck().size()-1);
     }
 
     //TODO Go through and make sure that all the methods work, also have to make a
