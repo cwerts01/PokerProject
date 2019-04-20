@@ -12,14 +12,12 @@ public class DeckOfCards {
                 Card newCard = new Card(Card.getSuits().get(i), j+2);
                 deck.add(newCard);
             }
-
         }
     }
 
     public void shuffle() {
 
     }
-
 
     private DeckOfCards() {
         this.createDeck();
