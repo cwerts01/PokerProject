@@ -1,9 +1,11 @@
 package com.company;
 
 public class TexasHoldEm implements Rules {
-    int handSize = 2;
-    int communityCardsSize = 5;
-    boolean ante = true;
+    public final int handSize = 2;
+    public boolean hasCommunityCards;
+    public final double ante = 5.0;
+    private int round = 1;
+
 
     @Override
     public boolean canCall() {
@@ -19,4 +21,16 @@ public class TexasHoldEm implements Rules {
     public boolean canRaise() {
         return false;
     }
+
+    public void flipNextCard() {
+        if(this.round < 4) {
+
+        }
+        else {
+
+        }
+    }
+
+
+
 }
