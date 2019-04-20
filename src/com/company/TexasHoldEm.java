@@ -2,28 +2,25 @@ package com.company;
 
 public class TexasHoldEm implements Rules {
     public final int handSize = 2;
-    public boolean hasCommunityCards;
-    public final double ante = 5.0;
-    private int round = 1;
-
+    Deck communityCards = new Deck();
 
     @Override
-    public boolean canCall() {
+    public boolean canCall(Player player, double amount) {
         return false;
     }
 
     @Override
-    public boolean check() {
+    public boolean canCheck(Player player) {
         return false;
     }
 
     @Override
-    public boolean canRaise() {
+    public boolean canRaise(Player player, double amount) {
         return false;
     }
 
-    public void flipNextCard() {
-        if(this.round < 4) {
+    public void nextRound(int round) {
+        if(round < 4) {
 
         }
         else {

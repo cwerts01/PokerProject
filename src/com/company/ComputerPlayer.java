@@ -1,6 +1,8 @@
 package com.company;
 
-public class ComputerPlayer implements Player {
+public class ComputerPlayer extends Player {
+
+
 
     public void call(){
 
@@ -9,4 +11,13 @@ public class ComputerPlayer implements Player {
     public void raise(){
 
     }
+
+
+
+
+
+
+
+
+
 }
