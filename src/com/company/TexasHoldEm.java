@@ -1,9 +1,16 @@
 package com.company;
 
 public class TexasHoldEm implements Rules {
-    public final int handSize = 2;
+    private final int handSize = 2;
+    private final int finalRound = 4;
     Deck communityCards = new Deck();
 
+    public int getHandSize() {
+        return this.handSize;
+    }
+    public int getFinalRound() {
+        return this.finalRound;
+    }
     @Override
     public boolean canCall(Player player, double amount, double pot) {
         if(pot - 2* player.getAmountBet() > 0 ) {
@@ -28,12 +35,15 @@ public class TexasHoldEm implements Rules {
         return false;
     }
 
-    public void nextRound(int round) {
-        if(round < 4) {
+    public void nextRound(int round, Deck deck) {
 
+        if(round == 2) {
+            communityCards.addCards(deck.dealCards(3));
+            System.out.println(communityCards);
         }
         else {
-
+            communityCards.addCards(deck.dealCards(1));
+            System.out.println(communityCards);
         }
     }
 

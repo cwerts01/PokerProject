@@ -1,10 +1,15 @@
 package com.company;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public abstract class Player {
 
     private boolean isChecked;
     private double wallet;
     private double amountBet;
+    private Deck hand = new Deck();
+    Scanner key = new Scanner(System.in);
 
     public void call(double amount, double pot) {
         if(this.wallet - amount >= 0 ) {
@@ -55,6 +60,7 @@ public abstract class Player {
     public void setCheckStatus(boolean status) {
         isChecked = status;
     }
+
 
     public abstract void makeDecision();
 }

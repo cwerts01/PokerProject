@@ -5,9 +5,8 @@ import java.util.ArrayList;
 public class Deck {
     ArrayList<Card> deck = new ArrayList<>();
 
-    //TODO implement shuffle method
-
-    private void initDeck(){
+    //Method that makes a whole deck
+    public void initDeck(){
         deck.clear();
         for (int i=0;i<4;i++){
             for(int j = 0; j<13; j++) {
@@ -28,7 +27,21 @@ public class Deck {
         deck.add(new Card("Diamonds", 14));
     }
 
+    public void addCards(ArrayList<Card> cards) {
+        for(int i = 0; i < cards.size(); i++) {
+            deck.add(cards.get(i));
+        }
+    }
+
+    //Just swap the cards around alot of times
     public void shuffle() {
+        for(int i = 0; i < 200; i++) {
+            int r = (int)(Math.random() * deck.size());
+            Card temp = deck.get(r);
+            deck.set(r, deck.get(0));
+            deck.set(0, temp);
+
+        }
 
     }
 
@@ -82,5 +95,18 @@ public class Deck {
 
     public String toString() {
         return deck.toString();
+    }
+
+    //Deals cards while removing them from the current deck
+    public ArrayList<Card> dealCards(int numberOfCards) {
+        ArrayList<Card> ret = new ArrayList<>();
+        for(int i = 0; i <= numberOfCards; i++) {
+            ret.add(deck.remove(0));
+        }
+        return ret;
+    }
+
+    public void clearDeck() {
+        deck.clear();
     }
 }
