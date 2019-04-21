@@ -6,9 +6,23 @@ public abstract class Player {
     private double wallet;
     private double amountBet;
 
-    public abstract void call();
+    public void call(double amount, double pot) {
+        if(this.wallet - amount >= 0 ) {
+            this.putMoneyInPot(amount);
+        }
+        else {
+            this.putMoneyInPot(this.wallet);
+        }
+    }
 
-    public abstract void raise();
+    public void check() {
+        this.isChecked = true;
+    }
+
+
+    public void raise(double amount) {
+        this.putMoneyInPot(amount);
+    }
 
     public boolean getCheckStatus() {
         return isChecked;
@@ -41,4 +55,6 @@ public abstract class Player {
     public void setCheckStatus(boolean status) {
         isChecked = status;
     }
+
+    public abstract void makeDecision();
 }

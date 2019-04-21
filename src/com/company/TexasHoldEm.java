@@ -5,17 +5,26 @@ public class TexasHoldEm implements Rules {
     Deck communityCards = new Deck();
 
     @Override
-    public boolean canCall(Player player, double amount) {
+    public boolean canCall(Player player, double amount, double pot) {
+        if(pot - 2* player.getAmountBet() > 0 ) {
+            return true;
+        }
         return false;
     }
 
     @Override
-    public boolean canCheck(Player player) {
+    public boolean canCheck(Player player, double pot) {
+        if(pot - player.getAmountBet()*2 <= 0 || player.getWallet() <= 0) {
+            return true;
+        }
         return false;
     }
 
     @Override
-    public boolean canRaise(Player player, double amount) {
+    public boolean canRaise(Player player, double amount, double pot) {
+        if(pot - 2* player.getAmountBet() >= 0 && player.getWallet() - amount >=0 ) {
+            return true;
+        }
         return false;
     }
 
