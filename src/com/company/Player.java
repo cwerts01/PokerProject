@@ -18,19 +18,24 @@ public abstract class Player {
         else {
             this.putMoneyInPot(this.wallet);
         }
+        this.unCheck();
     }
 
     public void check() {
         this.isChecked = true;
     }
 
-
     public void raise(double amount) {
         this.putMoneyInPot(amount);
+        this.unCheck();
     }
 
     public boolean getCheckStatus() {
         return isChecked;
+    }
+
+    private void unCheck() {
+        this.isChecked = false;
     }
 
     public double getAmountBet() {
@@ -59,6 +64,10 @@ public abstract class Player {
     }
     public void setCheckStatus(boolean status) {
         isChecked = status;
+    }
+
+    public Deck getHand() {
+        return this.hand;
     }
 
 

@@ -36,7 +36,6 @@ public class TexasHoldEm implements Rules {
     }
 
     public void nextRound(int round, Deck deck) {
-
         if(round == 2) {
             communityCards.addCards(deck.dealCards(3));
             System.out.println(communityCards);

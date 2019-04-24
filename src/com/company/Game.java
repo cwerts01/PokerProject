@@ -22,23 +22,42 @@ public class Game {
 
 
     //Considering having this delegated more to the rules classes since this varies depending on variant
-    public void startRound() {
+    public void playRound() {
+
         //This will be the ante
+        //TODO implement a new method for the ante
         if(this.round == 0 ) {
-           System.out.println("Would you like to pay the ante to play?");
-
+           this.betting();
         }
+
         //The dealing round
-        if(this.round == 1) {
-            System.out.println("Here is your hand");
-
+        else if(this.round == 1) {
+            //This long chain of methods deals the players their cards
+            players[0].getHand().addCards(gameDeck.dealCards(rules.getHandSize()));
+            players[1].getHand().addCards(gameDeck.dealCards(rules.getHandSize()));
+            this.betting();
+        }
+        else if(this.round == rules.getFinalRound()) {
+            this.endGame();
+        }
+        else {
+            rules.nextRound(round, gameDeck);
+            this.betting();
         }
 
+
+        round++;
+    }
+
+    //TODO implement method that will end the game and evaluate the hand as well as take care of the pot.
+    private void endGame() {
+
+    }
+
+    private void betting() {
         while(players[0].getCheckStatus() == false && players[1].getCheckStatus() == false) {
             players[0].makeDecision();
             players[1].makeDecision();
-            rules.nextRound(round, gameDeck);
         }
-        round++;
     }
 }
