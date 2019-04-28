@@ -35,17 +35,15 @@ public class Main {
                 System.out.println("Not a valid option, please try again");
             }
         }*/
-            Player hp = new HumanPlayer();
-            Player cp = new ComputerPlayer();
-            Rules tx = new TexasHoldEm();
-            Game game = new Game(hp, cp, tx);
-            game.newGame();
+        Player hp = new HumanPlayer();
+        Player cp = new ComputerPlayer();
+        Rules tx = new TexasHoldEm();
+        Game game = new Game(hp, cp, tx);
+        game.newGame();
+        while(!(game.getRound() == -1)) {
             game.playRound();
-            game.playRound();
-            game.playRound();
-            game.playRound();
-            game.playRound();
-            game.playRound();
+        }
+        System.out.println("Thanks for playing!");
 
     }
 }

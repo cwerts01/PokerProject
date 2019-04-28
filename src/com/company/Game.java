@@ -1,11 +1,14 @@
 package com.company;
 
+import java.util.Scanner;
+
 public class Game {
     private Rules rules;
     private int round;
     public Player[] players = new Player[2];
     Deck gameDeck = new Deck();
     double pot;
+    Scanner key = new Scanner(System.in);
 
 
     public Game(Player p1, Player p2, Rules rules) {
@@ -21,6 +24,9 @@ public class Game {
     //Need to figure out how much money each player should start with
     public void newGame() {
         this.unCheckPlayers();
+        this.unFoldPlayers();
+        players[0].clearHand();
+        players[1].clearHand();
         gameDeck.initDeck();
         gameDeck.shuffle();
         this.pot = 0;
@@ -30,6 +36,10 @@ public class Game {
     public void unCheckPlayers() {
         this.players[0].setCheckStatus(false);
         this.players[1].setCheckStatus(false);
+    }
+    public void unFoldPlayers() {
+        this.players[0].setFoldStatus(false);
+        this.players[1].setFoldStatus(false);
     }
 
 
@@ -91,6 +101,8 @@ public class Game {
             System.out.println("Tough luck, you lost the round");
         }
 
+        this.wantsNewGame();
+
     }
 
     private void betting() {
@@ -98,6 +110,10 @@ public class Game {
             System.out.println("The current pot is $" + this.pot);
             players[0].makeDecision(this.pot);
             this.pot = players[0].getAmountBet() + players[1].getAmountBet();
+            if(players[0].getFoldStatus()) {
+                this.foldGame(0);
+                return;
+            }
 
             //Making sure in case player 1 checked first and player 2 didn't in the first round
                 if(players[0].getCheckStatus() == true && players[1].getCheckStatus() == true)
@@ -105,7 +121,46 @@ public class Game {
 
             players[1].makeDecision(this.pot);
             this.pot = players[0].getAmountBet() + players[1].getAmountBet();
+            if(players[1].getFoldStatus()) {
+                this.foldGame(1);
+                return;
+            }
         }
 
     }
+
+
+    //Need to have the game be replayable
+    private void foldGame(int index) {
+        if(index == 1) {
+            players[0].setWallet(players[0].getWallet() + pot);
+            System.out.println("Your opponent has folded and you've won the pot of $" + pot);
+        }
+        else {
+            players[1].setWallet(players[1].getWallet() + pot);
+            System.out.println("Tough luck, you folded so the computer won");
+        }
+
+        this.wantsNewGame();
+
+    }
+
+    private void wantsNewGame() {
+        System.out.println(String.format("You currently have $%s and the computer has $%s", players[0].getWallet(), players[1].getWallet()));
+        System.out.println("If you would like to play another game? If so enter yes, if not enter no");
+        String response = key.nextLine();
+        if(response.equalsIgnoreCase("yes")) {
+            this.newGame();
+        }
+        else if (response.equalsIgnoreCase("no")) {
+            this.round = -2;
+        }
+        else this.wantsNewGame();
+
+    }
+
+    public int getRound() {
+        return this.round;
+    }
+
 }

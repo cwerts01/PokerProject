@@ -7,6 +7,7 @@ public abstract class Player {
 
     //TODO add a fold method for the player
 
+    private boolean isFolded;
     private boolean isChecked;
     private double wallet;
     private double amountBet;
@@ -37,10 +38,21 @@ public abstract class Player {
         this.isChecked = false;
     }
 
+    public void fold() {
+        this.isFolded = true;
+    }
+
+    public void clearHand() {
+        this.hand = new Deck();
+    }
+
 
     //Getters and Setters
     public boolean getCheckStatus() {
         return isChecked;
+    }
+    public boolean getFoldStatus() {
+        return isFolded;
     }
 
     public double getAmountBet() {
@@ -61,6 +73,10 @@ public abstract class Player {
 
     public void setCheckStatus(boolean status) {
         isChecked = status;
+    }
+
+    public void setFoldStatus(boolean status) {
+        this.isFolded = status;
     }
 
     public Deck getHand() {
@@ -104,4 +120,6 @@ public abstract class Player {
     }
 
     public abstract void makeDecision(double pot);
+
+
 }

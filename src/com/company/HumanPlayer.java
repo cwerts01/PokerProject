@@ -14,11 +14,12 @@ public class HumanPlayer extends Player {
         System.out.println("Enter the number of the action you'd like to make" +
                 "\n 1. Check" +
                 "\n 2. Call" +
-                "\n 3. Raise");
+                "\n 3. Raise" +
+                "\n 4. Fold");
         String response = key.nextLine();
 
         //Making sure they enter a valid response
-        if(!(response.equals("1") || (response.equals("2") || response.equals("3")))) {
+        if(!(response.equals("1") || (response.equals("2") || response.equals("3") || response.equals("4")))) {
             System.out.println("The last response was invalid try again");
             this.makeDecision(pot);
             return;
@@ -52,6 +53,11 @@ public class HumanPlayer extends Player {
             }
             System.out.println("You cannot raise that much money, try again");
             this.makeDecision(pot);
+        }
+
+        if(response.equals("4")) {
+            this.fold();
+            return;
         }
 
     }
