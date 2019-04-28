@@ -67,6 +67,7 @@ public class Game {
                 return;
             }
             System.out.println("It's the first round, no cards have been dealt yet but there is a round of betting");
+            round++;
             this.betting();
         }
         //The dealing round
@@ -76,11 +77,13 @@ public class Game {
         }
         else {
             rules.nextRound(round, gameDeck, players);
+            round++;
             this.betting();
         }
 
-        round++;
         this.unCheckPlayers();
+
+
     }
 
     //Method to finish the game, it gives the player their money based on the hand and then sets the pot to 0
