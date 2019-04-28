@@ -2,7 +2,10 @@ package com.company;
 
 public interface Rules {
 
-    public boolean canCall();
-    public boolean check();
-    public boolean canRaise();
+    public int getFinalRound();
+    public int getHandSize();
+
+    public void nextRound(int round, Deck deck);
+
+    public Deck getCommunityCards();
 }

@@ -1,6 +1,5 @@
 package com.company;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -41,7 +40,6 @@ public class Card {
 
     }
 
-    //Basic Printing, not sure what to do for Ace, if it'd be high or low
     public String toString() {
         String ret = "";
         if(this.number == 11)

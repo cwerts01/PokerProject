@@ -1,34 +1,33 @@
 package com.company;
 
 public class TexasHoldEm implements Rules {
-    public final int handSize = 2;
-    public final int communityCardsSize = 5;
-    public boolean ante = true;
-    private int round = 1;
+    private final int handSize = 2;
+    private final int finalRound = 4;
+    Deck communityCards = new Deck();
 
-
-    @Override
-    public boolean canCall() {
-        return false;
+    public int getHandSize() {
+        return this.handSize;
     }
 
-    @Override
-    public boolean check() {
-        return false;
+    public int getFinalRound() {
+        return this.finalRound;
     }
 
-    @Override
-    public boolean canRaise() {
-        return false;
-    }
-
-    public void flipNextCard() {
-        if(this.round < 4) {
-
+    public void nextRound(int round, Deck deck) {
+        if(round == 2) {
+            System.out.println("These are the community cards:");
+            communityCards.addCards(deck.dealCards(3));
+            System.out.println(communityCards);
         }
         else {
-            Evaluator.calculateHand();
+            communityCards.addCards(deck.dealCards(1));
+            System.out.println(communityCards);
         }
+    }
+
+    //Returns the cards of the player and of the community cards combined
+    public Deck getCommunityCards() {
+        return this.communityCards;
     }
 
 
