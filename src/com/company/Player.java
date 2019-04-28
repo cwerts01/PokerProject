@@ -121,5 +121,7 @@ public abstract class Player {
 
     public abstract void makeDecision(double pot);
 
+    public abstract void evaluateDecision(double pot, Deck deck, int round, Rules rules);
+
 
 }

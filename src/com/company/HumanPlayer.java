@@ -62,4 +62,8 @@ public class HumanPlayer extends Player {
 
     }
 
+    @Override
+    public void evaluateDecision(double pot, Deck deck, int round, Rules rules) {
+
+    }
 }

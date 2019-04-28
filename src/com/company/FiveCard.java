@@ -66,4 +66,39 @@ public class FiveCard implements Rules {
         }
         System.out.println("These are your new cards, " + players[0].getHand());
     }
+
+    public void swapCards(Deck aiDeck, Evaluator evaluator){
+        if (evaluator.threeOfAKind(aiDeck)>0){
+            int safeNum=evaluator.threeOfAKind(aiDeck);
+            for (Card card: aiDeck.getDeck()){
+                if (card.getNumber()!=safeNum){
+                    aiDeck.getDeck().remove(card);
+                    aiDeck.addCards(aiDeck.dealCards(1));
+                }
+            }
+        }
+        if (evaluator.pair(aiDeck)>0){
+            int safeNum=evaluator.threeOfAKind(aiDeck);
+            for (Card card: aiDeck.getDeck()){
+                if (card.getNumber()!=safeNum){
+                    aiDeck.getDeck().remove(card);
+                    aiDeck.addCards(aiDeck.dealCards(1));
+                }
+            }
+        }
+        else {
+            int highestNum = 0;
+            for (Card card: aiDeck.getDeck()){
+                if (card.getNumber()>highestNum){
+                    highestNum = card.getNumber();
+                }
+            }
+            for (Card card: aiDeck.getDeck()){
+                if (card.getNumber()!=highestNum){
+                    aiDeck.getDeck().remove(card);
+                    aiDeck.addCards(aiDeck.dealCards(1));
+                }
+            }
+        }
+    }
 }
