@@ -13,15 +13,25 @@ public class TexasHoldEm implements Rules {
         return this.finalRound;
     }
 
-    public void nextRound(int round, Deck deck) {
-        if(round == 2) {
+    public void nextRound(int round, Deck gameDeck, Player[] players) {
+        if(round == 1) {
+            //This long chain of methods deals the players their cards
+            players[0].getHand().addCards(gameDeck.dealCards(this.getHandSize()));
+            players[1].getHand().addCards(gameDeck.dealCards(this.getHandSize()));
+
+            System.out.println("These are your cards, " + players[0].getHand());
+        }
+        else if(round == 2) {
             System.out.println("These are the community cards:");
-            communityCards.addCards(deck.dealCards(3));
+            communityCards.addCards(gameDeck.dealCards(3));
             System.out.println(communityCards);
+            System.out.println("These are your cards " + players[0].getHand());
         }
         else {
-            communityCards.addCards(deck.dealCards(1));
+            communityCards.addCards(gameDeck.dealCards(1));
+            System.out.println("These are the community cards:");
             System.out.println(communityCards);
+            System.out.println("These are your cards " + players[0].getHand());
         }
     }
 

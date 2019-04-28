@@ -7,6 +7,7 @@ public class Evaluator {
     public String calculateHand(Deck myHand) {
         myHand.sortByRank();
         if(this.straightFlush(myHand) > 0) {
+
             return "9 " + this.straightFlush(myHand);
         }
         if(this.fourOfAKind(myHand) > 0) {
@@ -40,12 +41,6 @@ public class Evaluator {
 
         String player1 = this.calculateHand(players[0].getHand());
         String player2 = this.calculateHand(players[1].getHand());
-
-        System.out.println(players[0].getHand());
-        System.out.println(players[1].getHand());
-
-        System.out.println(player1);
-        System.out.println(player2);
 
 
         if(Integer.parseInt(player1.substring(0,1)) > Integer.parseInt(player2.substring(0,1))) {

@@ -23,6 +23,14 @@ public class Game {
 
     //Need to figure out how much money each player should start with
     public void newGame() {
+        if(players[0].getWallet() == 0) {
+            this.outOfMoney(0);
+            return;
+        }
+        if(players[1].getWallet() == 0) {
+            this.outOfMoney(1);
+            return;
+        }
         this.unCheckPlayers();
         this.unFoldPlayers();
         players[0].clearHand();
@@ -31,6 +39,8 @@ public class Game {
         gameDeck.shuffle();
         this.pot = 0;
         this.round = 0;
+        players[0].setAmountBet(0);
+        players[1].setAmountBet(0);
     }
 
     public void unCheckPlayers() {
@@ -48,26 +58,24 @@ public class Game {
 
         //This will be the ante
         if(this.round == 0 ) {
+            if(players[0].getWallet() == 0) {
+                this.outOfMoney(0);
+                return;
+            }
+            if(players[1].getWallet() == 0) {
+                this.outOfMoney(1);
+                return;
+            }
             System.out.println("It's the first round, no cards have been dealt yet but there is a round of betting");
             this.betting();
         }
-
-
         //The dealing round
-        else if(this.round == 1) {
-            //This long chain of methods deals the players their cards
-            players[0].getHand().addCards(gameDeck.dealCards(rules.getHandSize()));
-            players[1].getHand().addCards(gameDeck.dealCards(rules.getHandSize()));
 
-            System.out.println("These are your cards, " + players[0].getHand() + "\n There are no community cards at this time");
-            this.betting();
-        }
         else if(this.round == rules.getFinalRound()+1) {
             this.endGame();
         }
         else {
-            System.out.println("These are your cards " + players[0].getHand());
-            rules.nextRound(round, gameDeck);
+            rules.nextRound(round, gameDeck, players);
             this.betting();
         }
 
@@ -77,13 +85,16 @@ public class Game {
 
     //Method to finish the game, it gives the player their money based on the hand and then sets the pot to 0
     private void endGame() {
-        System.out.println("This is the end");
+        System.out.println("The round is over time to compare your hands");
         Evaluator evaluator = new Evaluator();
 
 
         //These lines make sure that the community cards are counted in addition to their regular hand
         players[0].getHand().addCards(rules.getCommunityCards().getDeck());
         players[1].getHand().addCards(rules.getCommunityCards().getDeck());
+
+        System.out.println("Your hand: " + players[0].getHand() + "\n");
+        System.out.println("The computer's hand:" + players[1].getHand() + "\n");
 
 
         String winner = evaluator.compareHands(players);
@@ -146,6 +157,14 @@ public class Game {
     }
 
     private void wantsNewGame() {
+        if(players[0].getWallet() == 0) {
+            this.outOfMoney(0);
+            return;
+        }
+        if(players[1].getWallet() == 0) {
+            this.outOfMoney(1);
+            return;
+        }
         System.out.println(String.format("You currently have $%s and the computer has $%s", players[0].getWallet(), players[1].getWallet()));
         System.out.println("If you would like to play another game? If so enter yes, if not enter no");
         String response = key.nextLine();
@@ -161,6 +180,17 @@ public class Game {
 
     public int getRound() {
         return this.round;
+    }
+
+    private void outOfMoney(int index) {
+        if(index == 1) {
+            System.out.println("Congrats on winning the game and beating the computer!");
+            this.round = -2;
+        }
+        else {
+            System.out.println("Tough luck, you've run out of money");
+            this.round = -2;
+        }
     }
 
 }
