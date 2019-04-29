@@ -253,4 +253,36 @@ public class Evaluator {
         else return 0;
     }
 
+    public String printHand(Deck myHand) {
+        myHand.sortByRank();
+        if(this.straightFlush(myHand) > 0) {
+
+            return "Straight Flush, high card: " + this.straightFlush(myHand);
+        }
+        if(this.fourOfAKind(myHand) > 0) {
+            return "Four of a kind, high card: " + this.fourOfAKind(myHand);
+        }
+        if(this.fullHouse(myHand) > 0) {
+            return "Full house, high card: " + this.fullHouse(myHand);
+        }
+        if(this.flush(myHand) > 0) {
+            return "Flush, high card: " + this.flush(myHand);
+        }
+        if(this.straight(myHand) > 0) {
+            return "Straight, high card: " + this.straight(myHand);
+        }
+        if(this.threeOfAKind(myHand) > 0) {
+            return "Three of a kind, high card: " + this.threeOfAKind(myHand);
+        }
+        if(this.twopair(myHand) > 0) {
+            return "Two pair, high card: " + this.twopair(myHand);
+        }
+        if(this.pair(myHand) > 0) {
+            return "Pair, high card: " + this.pair(myHand);
+        }
+
+        //Returns the highest card instead
+        return "Highest card: " + myHand.getDeck().get(myHand.getDeck().size()-1).getNumber();
+    }
+
 }

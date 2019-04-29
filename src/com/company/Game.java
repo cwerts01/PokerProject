@@ -97,8 +97,12 @@ public class Game {
         players[0].getHand().addCards(rules.getCommunityCards().getDeck());
         players[1].getHand().addCards(rules.getCommunityCards().getDeck());
 
-        System.out.println("Your hand: " + players[0].getHand() + "\n");
-        System.out.println("The computer's hand:" + players[1].getHand() + "\n");
+        players[0].getHand().sortByRank();
+        players[1].getHand().sortByRank();
+
+        System.out.println("Your hand: " + players[0].getHand() + "\n  " + evaluator.printHand(players[0].getHand()));
+        System.out.println();
+        System.out.println("The computer's hand:" + players[1].getHand() + "\n  " + evaluator.printHand(players[1].getHand()));
 
 
         String winner = evaluator.compareHands(players);
