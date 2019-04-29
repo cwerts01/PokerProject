@@ -14,10 +14,11 @@ public abstract class Player {
     private Deck hand = new Deck();
     Scanner key = new Scanner(System.in);
 
+
     //Player action methods
     public void call(double pot) {
         if(this.wallet - (pot * (2 - this.amountBet)) >= 0 ) {
-            this.putMoneyInPot(pot * (2 - this.amountBet));
+            this.putMoneyInPot(pot - (2 * this.amountBet));
         }
         else {
             this.putMoneyInPot(this.wallet);
@@ -113,13 +114,24 @@ public abstract class Player {
     }
 
     public boolean canRaise(double amount, double pot) {
-        if(pot - 2* this.getAmountBet() >= 0 && this.getWallet() - amount >=0 ) {
+        if(pot > this.getAmountBet()+amount) {
+            if(pot - 2*this.getAmountBet() <=0 && this.getWallet() - amount >=0)
+                return true;
+            else
+                return false;
+        }
+
+        if(pot - 2* this.getAmountBet() >= 0 && this.getWallet() - amount >=0 && pot-amount != 0 && pot - (2*amount) < 0) {
             return true;
         }
         return false;
     }
 
     public abstract void makeDecision(double pot);
+
+    public abstract void evaluateDecision(double pot, int round, Rules rules, Deck hand);
+
+    public abstract void setJustRaised(boolean set);
 
 
 }

@@ -41,6 +41,7 @@ public class Game {
         this.round = 0;
         players[0].setAmountBet(0);
         players[1].setAmountBet(0);
+        this.rules.getCommunityCards().clearDeck();
     }
 
     public void unCheckPlayers() {
@@ -120,7 +121,7 @@ public class Game {
     }
 
     private void betting() {
-        while(players[0].getCheckStatus() == false && players[1].getCheckStatus() == false) {
+        while(players[0].getCheckStatus() == false || players[1].getCheckStatus() == false) {
             System.out.println("The current pot is $" + this.pot);
             players[0].makeDecision(this.pot);
             this.pot = players[0].getAmountBet() + players[1].getAmountBet();
@@ -130,15 +131,23 @@ public class Game {
             }
 
             //Making sure in case player 1 checked first and player 2 didn't in the first round
-                if(players[0].getCheckStatus() == true && players[1].getCheckStatus() == true)
-                    break;
+            if(players[0].getCheckStatus() == true && players[1].getCheckStatus() == true)
+                break;
 
-            players[1].makeDecision(this.pot);
+            this.pot = players[0].getAmountBet() + players[1].getAmountBet();
+
+            Deck evalDeck = new Deck();
+            evalDeck.addCards(rules.getCommunityCards().getDeck());
+            evalDeck.addCards(players[1].getHand().getDeck());
+
+            players[1].evaluateDecision(this.pot, round-1, rules, evalDeck);
+            evalDeck.clearDeck();
             this.pot = players[0].getAmountBet() + players[1].getAmountBet();
             if(players[1].getFoldStatus()) {
                 this.foldGame(1);
                 return;
             }
+            players[1].setJustRaised(false);
         }
 
     }
